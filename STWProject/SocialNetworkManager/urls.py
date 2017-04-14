@@ -19,7 +19,6 @@ from django.contrib.auth.views import login, logout
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^socialnetworkmanagerapp/', include('socialnetworkmanagerapp.urls',  namespace='socialnetworkmanagerapp')),
     url(r'^accounts/login/$',  login,  name='login'),
     url(r'^accounts/logout/$',  logout,  name='logout'),
 ]
