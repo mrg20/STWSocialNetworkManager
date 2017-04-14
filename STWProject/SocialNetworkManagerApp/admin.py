@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-from SocialNetworkManagerApp.models import Box, Network, Complement
+import models
 
-
-admin.site.register(Box)
-admin.site.register(Network)
-admin.site.register(Complement)
+admin.site.register(models.Box)
+admin.site.register(models.Network)
+admin.site.register(models.Complement)
