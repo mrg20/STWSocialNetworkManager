@@ -21,3 +21,6 @@
     <input  type="submit"  value="login"  />
     {%  csrf_token  %}
 </form>
+<form action="/accounts/register/" method="GET">{% csrf_token %}
+    <input type="submit" value="I am not registered"/>
+</form>

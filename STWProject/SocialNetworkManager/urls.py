@@ -16,11 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
-from SocialNetworkManagerApp.views import profile_helloworld
+from SocialNetworkManagerApp.views import *
 
 urlpatterns = [
+    url(r'^$', provisional_homepage),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$',  login,  name='login'),
-    url(r'^accounts/logout/$',  logout,  name='logout'),
-    url(r'^accounts/profile/$', profile_helloworld)
+    url(r'^accounts/login/$', login, name='login'),
+    url(r'^accounts/logout/$', logout, name='logout'),
+    url(r'^accounts/profile/$', profile_helloworld),
+    url(r'^accounts/register/$', register),
+    url(r'^accounts/register/complete/$', registration_complete),
 ]
