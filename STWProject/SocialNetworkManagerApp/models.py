@@ -4,14 +4,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-'''
-This models.py isn't a final one. Maybe we do some changes
-later on.
-
-We are deciding if we are going to extend django user model.
-'''
-
-
 class Network(models.Model):
     name = models.CharField(max_length=20, null=False)
     description = models.TextField(max_length=300)
@@ -38,4 +30,14 @@ class Box(models.Model):
     logged_into_network = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.user.name + " Box: " + self.box_num
+        return self.user.username + " Box: " + self.box_num
+
+
+class UserNetworkInfo(models.Model):
+    user = models.ForeignKey(User)
+    network = models.ForeignKey(Network)
+    network_username = models.CharField(max_length=50)
+    network_password = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.user.username + "   " + self.network.name
