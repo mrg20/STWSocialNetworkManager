@@ -30,7 +30,7 @@ class Box(models.Model):
     logged_into_network = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.user.username + " Box: " + self.box_num
+        return self.user.username + " Box: " + str(self.box_num)
 
 
 class UserNetworkInfo(models.Model):

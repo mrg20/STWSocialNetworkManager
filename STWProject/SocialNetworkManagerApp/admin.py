@@ -5,3 +5,4 @@ import models
 admin.site.register(models.Box)
 admin.site.register(models.Network)
 admin.site.register(models.Complement)
+admin.site.register(models.UserNetworkInfo)

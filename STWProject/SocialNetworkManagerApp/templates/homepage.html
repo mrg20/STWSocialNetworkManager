@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+Homepage
+{% endblock %}
+{% block content %}
+<ul>
+{% for box in box_list %}
+    <li>{{ box.box_num }}</li>
+    {% empty %}<p> Sorry, no petitions yes </p>
+{% endfor %}
+</ul>
+{% endblock %}

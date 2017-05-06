@@ -1,15 +1,18 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template.context_processors import csrf
+from django.views.generic import ListView
 
 
 def profile_helloworld(request):
     return HttpResponse("You are now logged in (this is not permanent)")
 
 
-def provisional_homepage(request):
+@login_required
+def homepage(request):
     return HttpResponse("Only User treatment implemented")
 
 
