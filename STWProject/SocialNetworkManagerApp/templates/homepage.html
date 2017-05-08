@@ -3,10 +3,17 @@
 Homepage
 {% endblock %}
 {% block content %}
-<ul>
-{% for box in user_box %}
-    <li>{{ box.box_num }}</li>
+<table>
+    {% for box in user_box %}
+        {% if counter.pair %}
+            <tr>
+        {% endif %}
+        <td>{{ box.box_num }}</td>
+        {{ counter.increment }}
+        {% if counter.pair %}
+            </tr>
+        {% endif %}
     {% empty %}<p> Sorry, no boxes created </p>
-{% endfor %}
-</ul>
+    {% endfor %}
+</table>
 {% endblock %}

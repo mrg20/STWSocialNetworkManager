@@ -15,8 +15,28 @@ class ShowAllBox(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ShowAllBox, self).get_context_data(**kwargs)
-        context['user_box'] = Box.objects.filter(user=self.request.user)
+        boxes = Box.objects.filter(user=self.request.user)
+        counter = Counter()
+        context['user_box'] = list(boxes)
+        context['num_boxes'] = range(len(boxes))
+        context['counter'] = counter
+
         return context
+
+
+class Counter():
+    def __init__(self):
+        self.count = 0
+
+    def __str__(self):
+        return str(self.count)
+
+    def increment(self):
+        self.count += 1
+        return ''
+
+    def pair(self):
+        return self.count % 2 == 0
 
 
 def profile_helloworld(request):
