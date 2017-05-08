@@ -4,9 +4,9 @@ Homepage
 {% endblock %}
 {% block content %}
 <ul>
-{% for box in box_list %}
+{% for box in user_box %}
     <li>{{ box.box_num }}</li>
-    {% empty %}<p> Sorry, no petitions yes </p>
+    {% empty %}<p> Sorry, no boxes created </p>
 {% endfor %}
 </ul>
 {% endblock %}

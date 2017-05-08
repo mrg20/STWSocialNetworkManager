@@ -5,6 +5,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template.context_processors import csrf
 from django.views.generic import ListView
+from models import *
 
 from models import Box
 
@@ -21,6 +22,15 @@ class CreateHomepage(ListView):
         return super(CreateHomepage, self).form_valid(form)
     def logged_user(self):
         return self.request.user
+
+class ShowAllBox(ListView):
+    model = Box
+    template_name = 'homepage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowAllBox, self).get_context_data(**kwargs)
+        context['user_box'] = Box.objects.filter(user=self.request.user)
+        return context
 
 def profile_helloworld(request):
     return HttpResponse("You are now logged in (this is not permanent)")
