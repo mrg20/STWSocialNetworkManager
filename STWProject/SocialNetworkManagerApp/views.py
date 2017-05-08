@@ -10,19 +10,6 @@ from models import *
 from models import Box
 
 
-class CreateHomepage(ListView):
-    model = Box
-    template_name = 'homepage.html'
-
-
-    #query set here???
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(CreateHomepage, self).form_valid(form)
-    def logged_user(self):
-        return self.request.user
-
 class ShowAllBox(ListView):
     model = Box
     template_name = 'homepage.html'
@@ -31,6 +18,7 @@ class ShowAllBox(ListView):
         context = super(ShowAllBox, self).get_context_data(**kwargs)
         context['user_box'] = Box.objects.filter(user=self.request.user)
         return context
+
 
 def profile_helloworld(request):
     return HttpResponse("You are now logged in (this is not permanent)")
