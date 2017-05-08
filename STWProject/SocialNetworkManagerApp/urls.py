@@ -4,11 +4,8 @@ from views import *
 
 urlpatterns = [
 
-    url(r'^',
+    url(r'^$',
         login_required(ShowAllBox.as_view()),
         name='homepage')
-
-
-
 
 ]

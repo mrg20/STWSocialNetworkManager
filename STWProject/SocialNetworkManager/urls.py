@@ -20,7 +20,7 @@ from SocialNetworkManagerApp.views import *
 
 
 urlpatterns = [
-    url(r'^$', include('SocialNetworkManagerApp.urls')),
+    url(r'', include('SocialNetworkManagerApp.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', login, name='login'),
     url(r'^accounts/logout/$', logout, name='logout'),

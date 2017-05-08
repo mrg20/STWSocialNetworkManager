@@ -5,7 +5,6 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template.context_processors import csrf
 from django.views.generic import ListView
-from models import *
 
 from models import Box
 
