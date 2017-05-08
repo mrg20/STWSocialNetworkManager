@@ -40,12 +40,12 @@ class Counter():
 
 
 def profile_helloworld(request):
-    return HttpResponse("You are now logged in (this is not permanent)")
+    return HttpResponseRedirect('/')
 
 
-@login_required
+'''@login_required
 def homepage(request):
-    return HttpResponse("Only User treatment implemented")
+    return HttpResponse("Only User treatment implemented")'''
 
 
 def register(request):

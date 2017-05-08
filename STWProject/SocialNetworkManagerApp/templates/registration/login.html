@@ -1,8 +1,10 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock %}
+{% block head %}<h2>  Login  </h2>{% endblock %}
+{% block content %}
 {%  if  form.errors  %}
     <p>Your  username  and  password  didn't  match.  Please  try  again.</p>
 {%  endif  %}
-
-<h2>  MyRecommendations  Login  </h2>
 
 <form  method="post"  action="{%  url  'login'  %}">
     <table>
@@ -24,3 +26,4 @@
 <form action="/accounts/register/" method="GET">{% csrf_token %}
     <input type="submit" value="I am not registered"/>
 </form>
+{% endblock %}

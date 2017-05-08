@@ -2,13 +2,23 @@
 {% block title %}
 Homepage
 {% endblock %}
+
+
+{% block head %}
+<h2>Your social networks</h2>
+{% endblock %}
+
+
 {% block content %}
 <table>
     {% for box in user_box %}
         {% if counter.pair %}
             <tr>
         {% endif %}
-        <td>{{ box.box_num }}</td>
+        <td>
+            <p>{{ box.box_num }}</p>
+            <p>{{ box.network }} {{ box.complement }}</p>
+        </td>
         {{ counter.increment }}
         {% if counter.pair %}
             </tr>
@@ -16,4 +26,5 @@ Homepage
     {% empty %}<p> Sorry, no boxes created </p>
     {% endfor %}
 </table>
+<p><a href="/accounts/logout/">Logout</a></p>
 {% endblock %}
