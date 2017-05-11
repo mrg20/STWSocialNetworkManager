@@ -1,11 +1,10 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.template.context_processors import csrf
 from django.views.generic import ListView
 
+from SocialNetworkManagerApp.Controller.TableSizeController import TableSizeController
 from models import Box
 
 
@@ -16,27 +15,12 @@ class ShowAllBox(ListView):
     def get_context_data(self, **kwargs):
         context = super(ShowAllBox, self).get_context_data(**kwargs)
         boxes = Box.objects.filter(user=self.request.user)
-        counter = Counter()
+        counter = TableSizeController()
         context['user_box'] = list(boxes)
         context['num_boxes'] = range(len(boxes))
         context['counter'] = counter
 
         return context
-
-
-class Counter():
-    def __init__(self):
-        self.count = 0
-
-    def __str__(self):
-        return str(self.count)
-
-    def increment(self):
-        self.count += 1
-        return ''
-
-    def pair(self):
-        return self.count % 2 == 0
 
 
 def profile_helloworld(request):
