@@ -1,0 +1,11 @@
+div.Title{
+float:left;
+}
+
+div.Logout{
+float:right;
+}
+
+div.Generic{
+clear:both;
+}
