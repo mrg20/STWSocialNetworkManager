@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template.context_processors import csrf
 from django.views.generic import ListView
 
@@ -21,6 +21,9 @@ class ShowAllBox(ListView):
         context['counter'] = counter
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        return redirect("/box/"+request.POST.get("box_number", ""), box=request.POST.get("box_number", ""))
 
 
 def profile_helloworld(request):
