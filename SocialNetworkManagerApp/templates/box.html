@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+Single Box
+{% endblock %}
+
+
+{% block head %}
+<h2>Your Box</h2>
+{% endblock %}
+
+{% block content %}
+    <p>{{ box_info.box_num }}</p>
+    <p>{{ box_info.network }}</p>
+    <p>{{ box_info.complement.type }}</p>
+    <p>{{ box_info.logged_into_network }}</p>
+{% endblock %}

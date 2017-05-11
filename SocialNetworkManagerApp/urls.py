@@ -8,6 +8,10 @@ urlpatterns = [
 
     url(r'^$',
         login_required(ShowAllBox.as_view()),
-        name='homepage')
+        name='homepage'),
+
+    url(r'^box/(?P<pk>\d+)/$',
+        login_required(ShowSingleBox.as_view()),
+        name='box_detail')
 
 ]
