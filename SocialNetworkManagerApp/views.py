@@ -26,11 +26,6 @@ class ShowAllBox(ListView):
         return redirect("/box/"+request.POST.get("box_number", ""), box=request.POST.get("box_number", ""))
 
 
-'''@login_required
-def homepage(request):
-    return HttpResponse("Only User treatment implemented")'''
-
-
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

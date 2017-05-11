@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'', include('SocialNetworkManagerApp.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', login, name='login'),
-    url(r'^accounts/logout/$', logout, {'next_page': '/accounts/login/'}),
+    url(r'^accounts/logout/$', logout, name='logout'),
     url(r'^accounts/register/$', register),
     url(r'^accounts/register/complete/$', registration_complete),
 ]
