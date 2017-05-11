@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load staticfiles %}
 <head>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://www.google.com/css/maia.css">
-    <h1>Social Network Manager</h1>
+    <div class="Title"><h1>Social Network Manager</h1></div>
+    {% block logout %}
+    <div class="Logout"><p><a href="/accounts/logout/">Logout</a></p></div>
+    {% endblock %}
+    <div class="Generic">
     {% block head %}{% endblock %}
+    </div>
 </head>
 
 

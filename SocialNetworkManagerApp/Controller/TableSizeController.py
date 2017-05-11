@@ -11,3 +11,6 @@ class TableSizeController():
 
     def pair(self):
         return self.count % 2 == 0
+
+    def is_less_than_eight(self):
+        return self.count < 8

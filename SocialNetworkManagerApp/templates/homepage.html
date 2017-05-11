@@ -3,7 +3,6 @@
 Homepage
 {% endblock %}
 
-
 {% block head %}
 <h2>Your social networks</h2>
 {% endblock %}
@@ -25,6 +24,11 @@ Homepage
         {% endif %}
     {% empty %}<p> Sorry, no boxes created </p>
     {% endfor %}
+    {% if counter.is_less_than_eight %}
+        <td>
+            <p>boto de inserir box aquí</p>
+        </td>
+    {% endif %}
+    </tr>
 </table>
-<p><a href="/accounts/logout/">Logout</a></p>
 {% endblock %}
