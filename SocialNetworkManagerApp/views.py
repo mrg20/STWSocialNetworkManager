@@ -22,8 +22,19 @@ class ShowAllBox(ListView):
 
         return context
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         return redirect("/box/"+request.POST.get("box_number", ""), box=request.POST.get("box_number", ""))
+
+
+class ShowSingleBox(ListView):
+    model = Box
+    template_name = 'box.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowSingleBox, self).get_context_data(**kwargs)
+        box_info = Box.objects.get(user=self.request.user, box_num=self.kwargs['pk'])
+        context['box_info'] = box_info
+        return context
 
 
 def register(request):
