@@ -25,7 +25,6 @@ class Complement(models.Model):
 class Box(models.Model):
     user = models.ForeignKey(User, default=1)
     box_num = models.IntegerField(null=False)
-    network = models.ForeignKey(Network, null=False)
     complement = models.ForeignKey(Complement, null=False)
     logged_into_network = models.BooleanField(default=False)
 

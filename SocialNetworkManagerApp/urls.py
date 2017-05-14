@@ -12,6 +12,10 @@ urlpatterns = [
 
     url(r'^box/(?P<pk>\d+)/$',
         login_required(ShowSingleBox.as_view()),
-        name='box_detail')
+        name='box_detail'),
+
+    url(r'^box/(?P<pk>\d+)/edit/$',
+        login_required(EditBox.as_view()),
+        name='box_edit')
 
 ]

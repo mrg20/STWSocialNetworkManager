@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template.context_processors import csrf
+from django.views.generic import CreateView
 from django.views.generic import ListView
 
 from SocialNetworkManagerApp.Controller.TableSizeController import TableSizeController
@@ -35,6 +36,24 @@ class ShowSingleBox(ListView):
         box_info = Box.objects.get(user=self.request.user, box_num=self.kwargs['pk'])
         context['box_info'] = box_info
         return context
+
+    def post(self, request):
+        return redirect("/box/"+request.POST.get("box_number", "")+"/edit", box=request.POST.get("box_number", ""))
+
+
+class EditBox(CreateView):
+    model = Box
+    template_name = 'edit_box'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(EditBox, self).get_context_data(**kwargs)
+        box_info = Box.objects.get(user=self.request.user, box_num=self.kwargs['pk'])
+        context['box_info'] = box_info
+        return context
+
+    def form_valid(self, form):
+        pass
 
 
 def register(request):
