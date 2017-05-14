@@ -14,3 +14,6 @@ class TableSizeController():
 
     def is_less_than_eight(self):
         return self.count < 8
+
+    def get_box_num(self):
+        return self.count+1

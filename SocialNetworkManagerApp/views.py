@@ -41,11 +41,12 @@ class ShowSingleBox(ListView):
 
 class BoxCreate(CreateView):
     model = Box
-    template_name = 'new_box.html'
+    template_name = 'create_box.html'
     form_class = BoxForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.box_num=self.request.GET.get("box_number", "")
         return super(BoxCreate, self).form_valid(form)
 
 

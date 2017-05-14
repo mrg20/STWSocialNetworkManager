@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.core.urlresolvers import reverse
 
 
 class Network(models.Model):
@@ -15,7 +14,7 @@ class Network(models.Model):
 
 
 class Complement(models.Model):
-    type = models.CharField(max_length=20, null=False)
+    type = models.CharField(max_length=20)
     id_network = models.ForeignKey(Network)
     description = models.TextField(max_length=300)
 
@@ -25,16 +24,12 @@ class Complement(models.Model):
 
 class Box(models.Model):
     user = models.ForeignKey(User, default=1)
-    box_num = models.IntegerField(primary_key=True)
-    network = models.ForeignKey(Network, null=False)
-    complement = models.ForeignKey(Complement, null=False)
+    box_num = models.IntegerField()
+    complement = models.ForeignKey(Complement)
     logged_into_network = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.user.username + " Box: " + str(self.box_num)
-
-    def get_absolute_url(self):
-        return reverse('SocialNetworkManagerApp:box', kwargs={'pk': self.pk})
 
 
 class UserNetworkInfo(models.Model):
