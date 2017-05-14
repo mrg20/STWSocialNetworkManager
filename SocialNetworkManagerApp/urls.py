@@ -16,6 +16,10 @@ urlpatterns = [
 
     url(r'^box/(?P<pk>\d+)/edit/$',
         login_required(EditBox.as_view()),
-        name='box_edit')
+        name='box_edit'),
+
+    url(r'^box/create/$',
+        login_required(BoxCreate.as_view(model=Box, success_url="/")),
+        name='create_box')
 
 ]
