@@ -3,9 +3,10 @@
 {% load staticfiles %}
 <head>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://www.google.com/css/maia.css">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://www.google.com/css/maia.css">
     <div class="Title"><h1>Social Network Manager</h1></div>
     {% block logout %}
     <div class="Logout"><p><a href="/accounts/logout/">Logout</a></p></div>

@@ -30,7 +30,10 @@ Homepage
     {% endfor %}
     {% if counter.is_less_than_eight %}
         <td>
-            <p>boto de inserir box aquí</p>
+            <p></p>
+            <form action="/new_box/" method="GET">{% csrf_token %}
+                <input type="submit" value="New box"/>
+            </form>
         </td>
     {% endif %}
     </tr>

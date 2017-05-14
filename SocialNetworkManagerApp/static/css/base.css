@@ -1,11 +1,11 @@
 div.Title{
-float:left;
+    float:left;
 }
 
 div.Logout{
-float:right;
+    float:right;
 }
 
 div.Generic{
-clear:both;
+    clear:both;
 }
