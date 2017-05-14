@@ -2,9 +2,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template.context_processors import csrf
+from django.views.generic import CreateView
 from django.views.generic import ListView
 
 from SocialNetworkManagerApp.Controller.TableSizeController import TableSizeController
+from SocialNetworkManagerApp.forms import BoxForm
 from models import Box
 
 
@@ -35,6 +37,17 @@ class ShowSingleBox(ListView):
         box_info = Box.objects.get(user=self.request.user, box_num=self.kwargs['pk'])
         context['box_info'] = box_info
         return context
+
+
+class BoxCreate(CreateView):
+    model = Box
+    template_name = 'create_box.html'
+    form_class = BoxForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.box_num=self.request.GET.get("box_number", "")
+        return super(BoxCreate, self).form_valid(form)
 
 
 def register(request):

@@ -14,7 +14,7 @@ class Network(models.Model):
 
 
 class Complement(models.Model):
-    type = models.CharField(max_length=20, null=False)
+    type = models.CharField(max_length=20)
     id_network = models.ForeignKey(Network)
     description = models.TextField(max_length=300)
 
@@ -24,9 +24,8 @@ class Complement(models.Model):
 
 class Box(models.Model):
     user = models.ForeignKey(User, default=1)
-    box_num = models.IntegerField(null=False)
-    network = models.ForeignKey(Network, null=False)
-    complement = models.ForeignKey(Complement, null=False)
+    box_num = models.IntegerField()
+    complement = models.ForeignKey(Complement)
     logged_into_network = models.BooleanField(default=False)
 
     def __unicode__(self):
