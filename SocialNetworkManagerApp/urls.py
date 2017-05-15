@@ -15,7 +15,7 @@ urlpatterns = [
         name='box_detail'),
 
     url(r'^box/create/$',
-        login_required(BoxCreate.as_view(model=Box, success_url="/")),
+        login_required(BoxCreate.as_view()),
         name='create_box')
 
 ]

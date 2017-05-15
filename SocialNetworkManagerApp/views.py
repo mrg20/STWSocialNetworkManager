@@ -43,6 +43,7 @@ class BoxCreate(CreateView):
     model = Box
     template_name = 'create_box.html'
     form_class = BoxForm
+    success_url = "/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
