@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block head %}
+<h2>Create Box</h2>
+{% endblock %}
+
 {% block content %}
 
     <form method="post" enctype="multipart/form-data" action=""> {% csrf_token %}
