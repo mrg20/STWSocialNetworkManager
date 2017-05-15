@@ -13,8 +13,6 @@ Single Box
     <p>{{ box_info.network }}</p>
     <p>{{ box_info.complement.type }}</p>
     <p>{{ box_info.logged_into_network }}</p>
-    <form action="" method="post">{% csrf_token %}
-        <input type="hidden" name="box_number" value="{{ box.box_num }}"/>
-        <input type="submit" value="Edit box"/>
-    </form>
+    <li><a href="{% url 'boxes:box_edit' box_info.box_num %}">
+                Edit Box</a></li>
 {% endblock %}
