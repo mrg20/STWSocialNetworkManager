@@ -55,8 +55,7 @@ class BoxCreate(CreateView):
 class IncidenceCreate(CreateView):
     model = Incidence
     template_name = 'incidence.html'
-    formClass = IncidenceForm
-    fields = ('network', 'explanation',)
+    form_class = IncidenceForm
     success_url = "/"
 
     def form_valid(self, form):

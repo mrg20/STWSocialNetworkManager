@@ -11,4 +11,4 @@ class BoxForm(ModelForm):
 class IncidenceForm(ModelForm):
     class Meta:
         model = Incidence
-        exclude = ('user',)
+        exclude = ('user', 'date',)
