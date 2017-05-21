@@ -19,7 +19,11 @@ urlpatterns = [
         name='box_edit'),
 
     url(r'^box/create/$',
-        login_required(BoxCreate.as_view()),
-        name='create_box')
+        login_required(CreateBox.as_view()),
+        name='create_box'),
+
+    url(r'^box/(?P<pk>\d+)/delete/$',
+        login_required(DeleteBox.as_view()),
+        name='delete_box')
 
 ]
