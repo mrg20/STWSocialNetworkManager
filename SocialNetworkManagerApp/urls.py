@@ -16,6 +16,10 @@ urlpatterns = [
 
     url(r'^box/create/$',
         login_required(BoxCreate.as_view()),
-        name='create_box')
+        name='create_box'),
+
+    url(r'^incidence/$',
+        login_required(IncidenceCreate.as_view()),
+        name='incidence')
 
 ]

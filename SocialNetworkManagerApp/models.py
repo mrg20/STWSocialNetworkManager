@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.timezone import now
 
 
 class Network(models.Model):
@@ -30,6 +31,16 @@ class Box(models.Model):
 
     def __unicode__(self):
         return self.user.username + " Box: " + str(self.box_num)
+
+
+class Incidence(models.Model):
+    user = models.ForeignKey(User, default=1)
+    network = models.CharField(max_length=30)
+    explanation = models.TextField(max_length=300)
+    date = models.DateField(default=now)
+
+    def __unicode__(self):
+        return self.name
 
 
 class UserNetworkInfo(models.Model):

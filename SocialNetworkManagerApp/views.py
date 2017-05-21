@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
@@ -5,9 +6,9 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 
-from SocialNetworkManagerApp.Controller.TableSizeController import TableSizeController
-from SocialNetworkManagerApp.forms import BoxForm
-from models import Box
+from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
+from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
+from models import Box, Incidence
 
 
 class ShowAllBox(ListView):
@@ -49,6 +50,17 @@ class BoxCreate(CreateView):
         form.instance.user = self.request.user
         form.instance.box_num=self.request.GET.get("box_number", "")
         return super(BoxCreate, self).form_valid(form)
+
+
+class IncidenceCreate(CreateView):
+    model = Incidence
+    template_name = 'incidence.html'
+    form_class = IncidenceForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(IncidenceCreate, self).form_valid(form)
 
 
 def register(request):
