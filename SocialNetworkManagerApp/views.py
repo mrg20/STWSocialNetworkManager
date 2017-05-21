@@ -17,7 +17,7 @@ class ShowAllBox(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ShowAllBox, self).get_context_data(**kwargs)
-        boxes = Box.objects.filter(user=self.request.user)
+        boxes = Box.objects.filter(user=self.request.user).order_by('box_num')
         counter = TableSizeController()
         context['user_box'] = list(boxes)
         context['num_boxes'] = range(len(boxes))
