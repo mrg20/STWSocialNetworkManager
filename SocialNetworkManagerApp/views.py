@@ -25,9 +25,6 @@ class ShowAllBox(ListView):
 
         return context
 
-    def post(self, request):
-        return redirect("/box/"+request.POST.get("box_number", ""), box=request.POST.get("box_number", ""))
-
 
 class ShowSingleBox(ListView):
     model = Box
@@ -39,25 +36,32 @@ class ShowSingleBox(ListView):
         context['box_info'] = box_info
         return context
 
-    def post(self, request):
-        return redirect("/box/"+request.POST.get("box_number", "")+"/edit", box=request.POST.get("box_number", ""))
-
 
 class BoxCreate(CreateView):
     model = Box
     template_name = 'create_box.html'
     form_class = BoxForm
+    success_url = "/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.box_num=self.request.GET.get("box_number", "")
+        form.instance.box_num = self.request.GET.get("box_number", "")
         return super(BoxCreate, self).form_valid(form)
 
 
-class EditBox(UpdateView):
+class EditBox(CreateView):
     model = Box
     form_class = BoxForm
     template_name = 'edit_box.html'
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.box_num = self.kwargs["pk"]
+        if super(EditBox, self).form_valid(form):
+            Box.objects.filter(user=self.request.user, box_num=self.kwargs["pk"]).delete()
+
+        return super(EditBox, self).form_valid(form)
 
 
 def register(request):
