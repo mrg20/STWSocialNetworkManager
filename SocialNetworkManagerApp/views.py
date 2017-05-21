@@ -6,7 +6,7 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 
-from SocialNetworkManagerApp.Controller.TableSizeController import TableSizeController
+from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
 from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
 from models import Box, Incidence
 
