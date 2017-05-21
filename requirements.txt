@@ -1,1 +1,2 @@
-Django==1.11
+behave==1.2.5
+Django==1.10.5
