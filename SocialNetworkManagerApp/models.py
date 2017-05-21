@@ -34,14 +34,12 @@ class Box(models.Model):
 
 
 class Incidence(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    Network = models.ForeignKey(Network, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    user = models.ForeignKey(User, default=1)
+    network = models.CharField(max_length=30)
     explanation = models.TextField(max_length=300)
-    category = models.CharField(max_length=30)
     date = models.DateField(default=now)
 
-    def _unicode_(self):
+    def __unicode__(self):
         return self.name
 
 
