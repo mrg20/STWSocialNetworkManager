@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -6,9 +7,9 @@ from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic.base import View
 
-from SocialNetworkManagerApp.Controller.TableSizeController import TableSizeController
-from SocialNetworkManagerApp.forms import BoxForm
-from models import Box
+from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
+from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
+from models import Box, Incidence
 
 
 class ShowAllBox(ListView):
@@ -70,6 +71,17 @@ class DeleteBox(View):
     def get(self, request, pk):
         Box.objects.filter(user=request.user, box_num=pk).delete()
         return render_to_response(template_name='delete_box.html')
+
+
+class IncidenceCreate(CreateView):
+    model = Incidence
+    template_name = 'incidence.html'
+    form_class = IncidenceForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(IncidenceCreate, self).form_valid(form)
 
 
 def register(request):

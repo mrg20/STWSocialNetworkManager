@@ -26,4 +26,8 @@ urlpatterns = [
         login_required(DeleteBox.as_view()),
         name='delete_box')
 
+    url(r'^incidence/$',
+        login_required(IncidenceCreate.as_view()),
+        name='incidence')
+
 ]

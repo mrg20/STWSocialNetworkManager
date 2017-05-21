@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 {% load staticfiles %}
 <head>
@@ -9,8 +9,9 @@
     <title>{% block title %}{% endblock %}</title>
     <div class="Title"><h1>Social Network Manager</h1></div>
     {% block logout %}
-    <div class="Logout"><p><a href="/accounts/logout/">Logout</a></p></div>
+    <div class="Right"><p><a class="button" href="{% url 'logout' %}">Logout</a></p></div>
     {% endblock %}
+    <div class="Right"><p><a class="button" href="{% url 'boxes:incidence' %}">Incidences</a></p></div>
     <div class="Generic">
     {% block head %}{% endblock %}
     </div>
