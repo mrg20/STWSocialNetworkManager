@@ -1,3 +1,4 @@
+from __future__ import print_function
 from behave import *
 
 use_step_matcher("re")
@@ -9,7 +10,7 @@ def step_impl(context):
     user_info = []
     for row in context.table:
         for heading in row.headings:
-            user_info = row[heading]
+            user_info.append(row[heading])
     User.objects.create(username=user_info[0], password=user_info[1])
 
 
@@ -18,13 +19,13 @@ def step_impl(context):
     from SocialNetworkManagerApp.models import Network
     from SocialNetworkManagerApp.models import Complement
     from SocialNetworkManagerApp.models import Box
-    Network.objects.create()
-    Complement.objects.create()
-    Box.objects.create()
+    from django.contrib.auth.models import User
+    network = Network.objects.create(name='caralibro', description='libro de caras', network_url='fb.com')
+    complement = Complement.objects.create(type='muro', id_network=network, description='muro del libro de caras')
+    Box.objects.create(user=User.objects.get(username='usuari'), box_num=1, complement=complement)
+
 
 @then("I want to see the information of it")
 def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    pass
+    context.browser.visit(context.get_url('boxes:homepage'))
+    context.browser.find_by_tag('a').click()
