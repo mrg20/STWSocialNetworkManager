@@ -46,7 +46,7 @@ class CreateBox(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.box_num = self.request.GET.get("box_number", "")
+        form.instance.box_num = self.kwargs["pk"]
         return super(CreateBox, self).form_valid(form)
 
 

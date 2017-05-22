@@ -26,11 +26,11 @@ Homepage
                         <form action = "/" method="post">{% csrf_token %}
                             <p>{{ user_box.box_iterator.box_num }}</p>
                             <p>{{ box.network }} {{ box.complement }}</p>
-                            <li>
+                            <p>
                                 <a href="{% url 'boxes:box_detail' box.box_num %}">
                                     View Box
                                 </a>
-                            </li>
+                            </p>
                         </form>
                         </td>
                 {{ sections_iterator.not_new_box }}
@@ -39,10 +39,12 @@ Homepage
             {% if sections_iterator.is_new_box %}
             <td>
                 <p>{{ sections_iterator.get_box_num }}</p>
-                <form action="/box/create/" method="GET">{% csrf_token %}
-                    <input type="hidden" name="box_number" value="{{ sections_iterator.get_box_num }}"/>
-                    <input type="submit" value="New box"/>
-                </form>
+                <p>
+                    <a href="{% url 'boxes:create_box' sections_iterator.get_box_num %}">
+                        New Box
+                    </a>
+                </p>
+
             </td>
             {% else %}
                 {{ sections_iterator.new_box }}
