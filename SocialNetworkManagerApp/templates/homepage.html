@@ -10,9 +10,12 @@ Homepage
 
 {% block content %}
 <table>
+
     {% for box in user_box %}
+
         {% if counter.pair %}
             <tr>
+
         {% endif %}
         <td>
             <form action = "/" method="post">{% csrf_token %}
@@ -28,6 +31,7 @@ Homepage
         {% endif %}
     {% empty %}<p> Sorry, no boxes created </p>
     {% endfor %}
+
     {% if counter.is_less_than_eight %}
         <td>
             <p></p>
