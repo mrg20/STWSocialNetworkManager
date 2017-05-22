@@ -18,12 +18,10 @@ Homepage
 
         {% endif %}
         <td>
-            <form action = "/" method="post">{% csrf_token %}
-                <p>{{ box.box_num }}</p>
-                <p>{{ box.network }} {{ box.complement }}</p>
-                <input type="hidden" name="box_number" value="{{ box.box_num }}"/>
-                <input type="submit" value="View box"/>
-            </form>
+            <p>{{ box.box_num }}</p>
+            <p>{{ box.network }} {{ box.complement }}</p>
+            <li><a href="{% url 'boxes:box_detail' box.box_num %}">
+                View Box</a></li>
         </td>
         {{ counter.increment }}
         {% if counter.pair %}

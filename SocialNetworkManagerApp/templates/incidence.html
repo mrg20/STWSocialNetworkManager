@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+Incidences
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet"
+href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<h2>Incidences</h2>
+{% endblock %}
+
+{% block content %}
+    <script>
+        $(function() {
+            var networks = ["Facebook", "Instagram", "Twitter"];
+            $( "#id_network" ).autocomplete({
+                source: networks
+            });
+        });
+    </script>
+    <form method="post" enctype="multipart/form-data" action=""> {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Send incidence"/>
+    </form>
+{% endblock %}
+
