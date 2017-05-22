@@ -24,7 +24,7 @@ urlpatterns = [
 
     url(r'^box/(?P<pk>\d+)/delete/$',
         login_required(DeleteBox.as_view()),
-        name='delete_box')
+        name='delete_box'),
 
     url(r'^incidence/$',
         login_required(IncidenceCreate.as_view()),

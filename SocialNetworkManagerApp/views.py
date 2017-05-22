@@ -22,7 +22,7 @@ class ShowAllBox(ListView):
         counter = TableSizeController()
         context['user_box'] = list(boxes)
         context['num_boxes'] = range(len(boxes))
-        context['counter'] = counter
+        context['sections_iterator'] = counter
 
         return context
 
