@@ -38,9 +38,10 @@ class Incidence(models.Model):
     network = models.CharField(max_length=30)
     explanation = models.TextField(max_length=300)
     date = models.DateField(default=now)
-
+    country = models.CharField(max_length=30, blank=True, null=True)
+    city = models.CharField(max_length=30, default="")
     def __unicode__(self):
-        return self.name
+        return str(self.user) + " : " + str(self.network)
 
 
 class UserNetworkInfo(models.Model):
