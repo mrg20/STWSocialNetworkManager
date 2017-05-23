@@ -1,6 +1,15 @@
-# Created by noki at 22/05/17
-Feature: #Enter feature name here
-  # Enter feature description here
 
-  Scenario: # Enter scenario name here
-    # Enter steps here
+Feature: Modify box
+  As a user
+  I want to modify a box
+  So I can change its content
+
+  Scenario: Modify box
+    Given I am logged in as
+    | username | password |
+    | usuari   | contra   |
+    And I have a registered box
+    And I want to see the information
+    And I want to modify it
+    And I modify it
+    Then I go to the homepage
