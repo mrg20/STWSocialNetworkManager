@@ -15,10 +15,9 @@ href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 {% block content %}
     <script>
         $(function() {
-            $.getJSON("{% static "countries.json" %}", {}, function (countries) {
-                $("#id_country").autocomplete({
-                    source: countries
-                });
+            var networks = ["Facebook", "Instagram", "Flikr", "Teitter", "Snapchat"];
+            $( "#id_network" ).autocomplete({
+                source: networks
             });
             $("#id_city").autocomplete({
                 source: function( request, response ) {
