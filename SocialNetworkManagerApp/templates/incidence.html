@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}
 Incidences
 {% endblock %}
@@ -14,9 +15,40 @@ href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 {% block content %}
     <script>
         $(function() {
-            var networks = ["Facebook", "Instagram", "Twitter"];
-            $( "#id_network" ).autocomplete({
-                source: networks
+            $.getJSON("{% static "countries.json" %}", {}, function (countries) {
+                $("#id_country").autocomplete({
+                    source: countries
+                });
+            });
+            $("#id_city").autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url: "http://ws.geonames.org/searchJSON",
+                        dataType: "jsonp",
+                        data: {
+                            featureClass: "P",
+                            maxRows: 10,
+                            name_startsWith: request.term,
+                            username: "alba"
+                        },
+                        success: function( data ) {
+                            response( $.map( data.geonames, function( item ) {
+                                return {
+                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                    value: item.name,
+                                    stateOrProvince: item.adminName1,
+                                    countryName: item.countryName
+                                }
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function( event, ui ) {
+                    if (ui.item) {
+                        $("#id_country").val(ui.item.countryName);
+                    }
+                }
             });
         });
     </script>
