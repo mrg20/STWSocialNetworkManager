@@ -5,12 +5,9 @@ use_step_matcher("re")
 
 @step("I want to modify it")
 def step_impl(context):
-    context.browser.find_by_tag('a')
+    context.browser.find_by_value('Edit Box').first.click()
 
 
-@step("I modify it")
+@then("I save edited box")
 def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    pass
+    context.browser.find_by_value('Save edited box').first.click()

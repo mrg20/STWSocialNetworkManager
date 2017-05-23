@@ -11,5 +11,5 @@ Feature: Modify box
     And I have a registered box
     And I want to see the information
     And I want to modify it
-    And I modify it
-    Then I go to the homepage
+    And I complete the form
+    Then I save edited box
