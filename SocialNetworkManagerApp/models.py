@@ -6,9 +6,9 @@ from django.utils.timezone import now
 
 
 class Network(models.Model):
-    name = models.CharField(max_length=20, null=False)
+    name = models.CharField(max_length=20)
     description = models.TextField(max_length=300)
-    network_url = models.URLField(null=False)
+    network_url = models.URLField()
 
     def __unicode__(self):
         return self.name

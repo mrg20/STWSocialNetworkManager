@@ -22,7 +22,7 @@ class ShowAllBox(ListView):
         counter = TableSizeController()
         context['user_box'] = list(boxes)
         context['num_boxes'] = range(len(boxes))
-        context['counter'] = counter
+        context['sections_iterator'] = counter
 
         return context
 
@@ -46,7 +46,7 @@ class CreateBox(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.box_num = self.request.GET.get("box_number", "")
+        form.instance.box_num = self.kwargs["pk"]
         return super(CreateBox, self).form_valid(form)
 
 

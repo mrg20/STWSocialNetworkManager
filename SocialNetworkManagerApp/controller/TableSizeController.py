@@ -1,6 +1,7 @@
 class TableSizeController():
     def __init__(self):
         self.count = 0
+        self.newbox = True
 
     def __str__(self):
         return str(self.count)
@@ -17,3 +18,14 @@ class TableSizeController():
 
     def get_box_num(self):
         return self.count+1
+
+    def not_new_box(self):
+        self.newbox = False
+        return ''
+
+    def new_box(self):
+        self.newbox = True
+        return ''
+
+    def is_new_box(self):
+        return self.newbox
