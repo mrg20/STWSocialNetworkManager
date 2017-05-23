@@ -18,13 +18,13 @@ urlpatterns = [
         login_required(EditBox.as_view()),
         name='box_edit'),
 
-    url(r'^box/create/$',
+    url(r'^box//(?P<pk>\d+)/create/$',
         login_required(CreateBox.as_view()),
         name='create_box'),
 
     url(r'^box/(?P<pk>\d+)/delete/$',
         login_required(DeleteBox.as_view()),
-        name='delete_box')
+        name='delete_box'),
 
     url(r'^incidence/$',
         login_required(IncidenceCreate.as_view()),
