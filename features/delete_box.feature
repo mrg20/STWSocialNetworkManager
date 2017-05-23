@@ -1,6 +1,13 @@
-# Created by noki at 22/05/17
-Feature: #Enter feature name here
-  # Enter feature description here
+Feature: Delete box
+  As a user
+  I want to delete a box
+  So I do not see the unused ones
 
-  Scenario: # Enter scenario name here
-    # Enter steps here
+  Scenario: Delete box
+    Given I am logged in as
+    | username | password |
+    | usuari   | contra   |
+    And I have a registered box
+    And I want to see the information
+    And I delete it
+    Then I go to the homepage

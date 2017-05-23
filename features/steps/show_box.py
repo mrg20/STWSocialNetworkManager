@@ -12,6 +12,10 @@ def step_impl(context):
         for heading in row.headings:
             user_info.append(row[heading])
     User.objects.create(username=user_info[0], password=user_info[1])
+    context.browser.visit(context.get_url('login'))
+    context.browser.fill("username", user_info[0])
+    context.browser.fill("password", user_info[1])
+    context.browser.find_by_tag('form').first.find_by_value('login').first.click()
 
 
 @step("I have a registered box")
@@ -28,4 +32,4 @@ def step_impl(context):
 @then("I want to see the information of it")
 def step_impl(context):
     context.browser.visit(context.get_url('boxes:homepage'))
-    context.browser.find_by_tag('a').click()
+    context.browser.find_by_tag('p').find_by_tag('a').first.click()

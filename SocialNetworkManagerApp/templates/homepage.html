@@ -17,8 +17,8 @@ Homepage
         <td>
             <p>{{ box.box_num }}</p>
             <p>{{ box.network }} {{ box.complement }}</p>
-            <li><a href="{% url 'boxes:box_detail' box.box_num %}">
-                View Box</a></li>
+            <p><a value="View Box" href="{% url 'boxes:box_detail' box.box_num %}">
+                View Box</a></p>
         </td>
         {{ counter.increment }}
         {% if counter.pair %}
