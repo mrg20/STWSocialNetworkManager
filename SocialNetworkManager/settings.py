@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'SocialNetworkManagerApp',
-    'mathfilters'
+    'SocialNetworkManagerApp'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,7 +55,7 @@ ROOT_URLCONF = 'SocialNetworkManager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'SocialNetworkManagerApp/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

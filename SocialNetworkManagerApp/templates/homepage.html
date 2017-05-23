@@ -1,6 +1,5 @@
 
 {% extends "base.html" %}
-{% load mathfilters %}
 {% block title %}
 Homepage
 {% endblock %}
@@ -13,8 +12,6 @@ Homepage
 {% block content %}
 {{ sections_iterator.new_box }}
 <table>
-
-
     {% for section in "x"|rjust:"8" %}
         {% if sections_iterator.pair %}
         <tr>
@@ -27,7 +24,7 @@ Homepage
                             <p>{{ user_box.box_iterator.box_num }}</p>
                             <p>{{ box.network }} {{ box.complement }}</p>
                             <p>
-                                <a href="{% url 'boxes:box_detail' box.box_num %}">
+                                <a value="View Box" href="{% url 'boxes:box_detail' box.box_num %}">
                                     View Box
                                 </a>
                             </p>
@@ -40,7 +37,7 @@ Homepage
             <td>
                 <p>{{ sections_iterator.get_box_num }}</p>
                 <p>
-                    <a href="{% url 'boxes:create_box' sections_iterator.get_box_num %}">
+                    <a value="New box" href="{% url 'boxes:create_box' sections_iterator.get_box_num %}">
                         New Box
                     </a>
                 </p>
