@@ -1,6 +1,5 @@
 
 {% extends "base.html" %}
-{% load mathfilters %}
 {% block title %}
 Homepage
 {% endblock %}
@@ -38,7 +37,7 @@ Homepage
             <td>
                 <p>{{ sections_iterator.get_box_num }}</p>
                 <p>
-                    <a href="{% url 'boxes:create_box' sections_iterator.get_box_num %}">
+                    <a value="New box" href="{% url 'boxes:create_box' sections_iterator.get_box_num %}">
                         New Box
                     </a>
                 </p>
