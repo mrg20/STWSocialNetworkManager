@@ -1,4 +1,6 @@
+
 {% extends "base.html" %}
+{% load mathfilters %}
 {% block title %}
 Homepage
 {% endblock %}
@@ -9,32 +11,49 @@ Homepage
 
 
 {% block content %}
+{{ sections_iterator.new_box }}
 <table>
-    {% for box in user_box %}
-        {% if counter.pair %}
-            <tr>
-        {% endif %}
-        <td>
-            <p>{{ box.box_num }}</p>
-            <p>{{ box.network }} {{ box.complement }}</p>
-            <p><a value="View Box" href="{% url 'boxes:box_detail' box.box_num %}">
-                View Box</a></p>
-        </td>
-        {{ counter.increment }}
-        {% if counter.pair %}
+    {% for section in "x"|rjust:"8" %}
+        {% if sections_iterator.pair %}
+        <tr>
+            {% endif %}
+            {% for box in user_box %}
+                {% if sections_iterator.get_box_num == box.box_num %}
+                    <td>
+                        <p>{{ sections_iterator.get_box_num }}</p>
+                        <form action = "/" method="post">{% csrf_token %}
+                            <p>{{ user_box.box_iterator.box_num }}</p>
+                            <p>{{ box.network }} {{ box.complement }}</p>
+                            <p>
+                                <a value="View Box" href="{% url 'boxes:box_detail' box.box_num %}">
+                                    View Box
+                                </a>
+                            </p>
+                        </form>
+                        </td>
+                {{ sections_iterator.not_new_box }}
+                {% endif %}
+            {% endfor %}
+            {% if sections_iterator.is_new_box %}
+            <td>
+                <p>{{ sections_iterator.get_box_num }}</p>
+                <p>
+                    <a href="{% url 'boxes:create_box' sections_iterator.get_box_num %}">
+                        New Box
+                    </a>
+                </p>
+
+            </td>
+            {% else %}
+                {{ sections_iterator.new_box }}
+            {% endif %}
+
+        {{ sections_iterator.increment }}
+        {% if sections_iterator.pair %}
             </tr>
         {% endif %}
-    {% empty %}<p> Sorry, no boxes created </p>
+
+
     {% endfor %}
-    {% if counter.is_less_than_eight %}
-        <td>
-            <p></p>
-            <form action="/box/create/" method="GET">{% csrf_token %}
-                <input type="hidden" name="box_number" value="{{ counter.get_box_num }}"/>
-                <input type="submit" value="New box"/>
-            </form>
-        </td>
-    {% endif %}
-    </tr>
 </table>
 {% endblock %}
