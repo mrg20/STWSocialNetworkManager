@@ -1,3 +1,4 @@
+from __future__ import print_function
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -5,8 +6,10 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic.base import View
+from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
 from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
@@ -153,3 +156,12 @@ class APIBoxesDetail(RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Box.objects.filter(user=self.request.user)
+
+    def put(self, request, **kwargs):
+        serializer = BoxSerializer(data=request.data)
+        if serializer.is_valid() and Box.objects.get(user=request.user,
+                                                     box_num=serializer.cleaned_data['box_num']).exists():
+            Box.objects.get(user=request.user, box_num=serializer.cleaned_data['box_num']).delete()
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
