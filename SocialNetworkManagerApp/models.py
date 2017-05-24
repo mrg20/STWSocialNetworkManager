@@ -44,6 +44,7 @@ class Incidence(models.Model):
         return str(self.user) + " : " + str(self.network)
 
 
+#Only used when the connections with the APIs are done
 class UserNetworkInfo(models.Model):
     user = models.ForeignKey(User)
     network = models.ForeignKey(Network)
