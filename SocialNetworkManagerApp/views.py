@@ -6,10 +6,13 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic.base import View
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
 from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
-from models import Box, Incidence
+from SocialNetworkManagerApp.serializers import NetworkSerializer
+from models import Box, Incidence, Network
 
 
 class ShowAllBox(ListView):
@@ -102,3 +105,18 @@ def register(request):
 
 def registration_complete(request):
     return render_to_response('registration/registration_complete.html')
+
+
+#------------------API--------------------
+
+class IsUser(IsAuthenticated):
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated()
+
+
+class APINetworks(ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    model = Network
+    queryset = Network.objects.all()
+    serializer_class = NetworkSerializer

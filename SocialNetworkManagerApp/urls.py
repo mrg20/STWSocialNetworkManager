@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from views import *
 
@@ -31,3 +32,14 @@ urlpatterns = [
         name='incidence')
 
 ]
+
+urlpatterns += [
+# RESTful API
+    url(r'^api/restaurants/$',
+        APINetworks.as_view(), name='networks')
+
+
+]
+
+# Format suffixes
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', 'xml'])
