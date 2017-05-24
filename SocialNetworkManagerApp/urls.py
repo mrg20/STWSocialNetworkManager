@@ -35,9 +35,23 @@ urlpatterns = [
 
 urlpatterns += [
 # RESTful API
-    url(r'^api/restaurants/$',
-        APINetworks.as_view(), name='networks')
+    url(r'^api/networks/$',
+        APINetworksList.as_view(), name='network-list'),
 
+    url(r'^api/networks/(?P<pk>\d+)/$',
+        APINetworksDetail.as_view(), name='network-detail'),
+
+    url(r'^api/complements/$',
+        APIComplementsList.as_view(), name='complement-list'),
+
+    url(r'^api/complements/(?P<pk>\d+)/$',
+        APIComplementsDetail.as_view(), name='complement-detail'),
+
+    url(r'^api/boxes/$',
+        APIBoxesList.as_view(), name='box-list'),
+
+    url(r'^api/boxes/(?P<pk>\d+)/$',
+        APIBoxesDetail.as_view(), name='box-detail')
 
 ]
 

@@ -1,4 +1,3 @@
-import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -6,13 +5,13 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic.base import View
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
 from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
-from SocialNetworkManagerApp.serializers import NetworkSerializer
-from models import Box, Incidence, Network
+from SocialNetworkManagerApp.serializers import NetworkSerializer, ComplementSerializer, BoxSerializer
+from models import Box, Incidence, Network, Complement
 
 
 class ShowAllBox(ListView):
@@ -107,16 +106,50 @@ def registration_complete(request):
     return render_to_response('registration/registration_complete.html')
 
 
-#------------------API--------------------
-
-class IsUser(IsAuthenticated):
-
-    def has_permission(self, request, view):
-        return request.user.is_authenticated()
+'''------------------API--------------------'''
 
 
-class APINetworks(ListCreateAPIView):
+class APINetworksList(ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     model = Network
     queryset = Network.objects.all()
     serializer_class = NetworkSerializer
+
+
+class APINetworksDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    model = Network
+    queryset = Network.objects.all()
+    serializer_class = NetworkSerializer
+
+
+class APIComplementsList(ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    model = Complement
+    queryset = Complement.objects.all()
+    serializer_class = ComplementSerializer
+
+
+class APIComplementsDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    model = Complement
+    queryset = Complement.objects.all()
+    serializer_class = ComplementSerializer
+
+
+class APIBoxesList(ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    model = Box
+    serializer_class = BoxSerializer
+
+    def get_queryset(self):
+        return Box.objects.filter(user=self.request.user)
+
+
+class APIBoxesDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    model = Box
+    serializer_class = BoxSerializer
+
+    def get_queryset(self):
+        return Box.objects.filter(user=self.request.user)
