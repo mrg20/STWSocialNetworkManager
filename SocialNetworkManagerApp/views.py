@@ -148,6 +148,13 @@ class APIBoxesList(ListCreateAPIView):
     def get_queryset(self):
         return Box.objects.filter(user=self.request.user)
 
+    def post(self, request, *args, **kwargs):
+        serializer = BoxSerializer(data=request.data)
+        if serializer.is_valid() and Box.objects.filter(user=request.user,
+                                                     box_num=request.POST['box_num']).exists():
+            Box.objects.get(user=request.user, box_num=request.POST['box_num']).delete()
+        return self.create(request, *args, **kwargs)
+
 
 class APIBoxesDetail(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
@@ -157,11 +164,5 @@ class APIBoxesDetail(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Box.objects.filter(user=self.request.user)
 
-    def put(self, request, *args, **kwargs):
-        serializer = BoxSerializer(data=request.data)
-        if serializer.is_valid() and Box.objects.get(user=request.user,
-                                                     box_num=serializer.cleaned_data['box_num']).exists():
-            Box.objects.get(user=request.user, box_num=serializer.cleaned_data['box_num']).delete()
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
