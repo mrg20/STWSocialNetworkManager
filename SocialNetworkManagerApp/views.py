@@ -157,7 +157,7 @@ class APIBoxesDetail(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Box.objects.filter(user=self.request.user)
 
-    def put(self, request, **kwargs):
+    def put(self, request, *args, **kwargs):
         serializer = BoxSerializer(data=request.data)
         if serializer.is_valid() and Box.objects.get(user=request.user,
                                                      box_num=serializer.cleaned_data['box_num']).exists():
