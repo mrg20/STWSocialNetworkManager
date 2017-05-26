@@ -34,3 +34,5 @@ def step_impl(context):
 def step_impl(context):
     context.browser.visit(context.get_url('boxes:homepage'))
     context.browser.find_by_value('View Box').first.click()
+
+
