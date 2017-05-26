@@ -42,7 +42,7 @@ def step_impl(context):
 
 @step("The fields are invalid")
 def step_impl(context):
-    context.browser.find_by_text("Your  username  and  password  didn't  match.  Please  try  again.").click()
+    context.browser.find_by_text("Your  username  and  password  didn't  match.  Please  try  again.")
 
 
 @then("I go to register page")
