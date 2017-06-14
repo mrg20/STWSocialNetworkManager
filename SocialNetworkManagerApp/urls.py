@@ -29,7 +29,11 @@ urlpatterns = [
 
     url(r'^incidence/$',
         login_required(IncidenceCreate.as_view()),
-        name='incidence')
+        name='incidence'),
+
+    url(r'^review/$',
+        login_required(ReviewDetail.as_view()),
+        name='reviews')
 
 ]
 

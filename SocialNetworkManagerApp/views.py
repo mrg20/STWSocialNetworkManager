@@ -89,6 +89,11 @@ class IncidenceCreate(CreateView):
         return super(IncidenceCreate, self).form_valid(form)
 
 
+class ReviewDetail(ListView):
+    template_name = 'review.html'
+    queryset = ""
+
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

@@ -40,6 +40,7 @@ class Incidence(models.Model):
     date = models.DateField(default=now)
     country = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=30, default="")
+
     def __unicode__(self):
         return str(self.user) + " : " + str(self.network)
 
@@ -53,3 +54,14 @@ class UserNetworkInfo(models.Model):
 
     def __unicode__(self):
         return self.user.username + "   " + self.network.name
+
+
+#Reviews on how the page works with the network
+class ReviewNetwork(models.Model):
+    user = models.ForeignKey(User)
+    network = models.ForeignKey(Network)
+    title = models.CharField(max_length=40)
+    explanation = models.TextField(max_length=300)
+
+    def __unicode__(self):
+        return self.user.username + "  " + self.network.name
