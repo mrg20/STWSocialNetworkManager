@@ -5,20 +5,34 @@
 {% endblock %}
 
 {% block content %}
+<span vocab="http://schema.org/" typeof="Review">
     <a value="Create Review" href="{% url 'boxes:review-create' %}">
         Create review
     </a>
-    <tr>
     {% for review in reviews %}
         <hr>
         <td>
-        <p>User: {{ review.user }}</p>
-        <p>Network: {{ review.network }}</p>
-        <p>Title: {{ review.title }}</p>
-        <p>Opinion: {{ review.explanation }}</p>
-        <p>How good the product is: {{ review.who_to_recommend }}</p>
+        <p>
+            <span property="author">
+                User: {{ review.user }}
+            </span>
+        </p>
+        <p>
+            <span property="itemReviewed">
+                Network: {{ review.network }}
+            </span>
+        </p>
+        <span property="reviewBody">
+            <p>Title: {{ review.title }}</p>
+            <p>Opinion: {{ review.explanation }}</p>
+        </span>
+        <p rel="reviewRating" typeof="Rating">
+            <scan property="ratingValue">
+                How good the product is: {{ review.who_to_recommend }}
+            </scan>
+        </p>
         <p>Date of opinion: {{ review.date }}</p>
         </td>
     {% endfor %}
-    </tr>
+</span>
 {% endblock %}
