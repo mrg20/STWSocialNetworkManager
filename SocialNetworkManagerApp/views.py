@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
 from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
 from SocialNetworkManagerApp.serializers import NetworkSerializer, ComplementSerializer, BoxSerializer
-from models import Box, Incidence, Network, Complement
+from models import Box, Incidence, Network, Complement, ReviewNetwork
 
 
 class ShowAllBox(ListView):
@@ -91,7 +91,14 @@ class IncidenceCreate(CreateView):
 
 class ReviewDetail(ListView):
     template_name = 'review.html'
-    queryset = ""
+    model = ReviewNetwork
+    success_url="/"
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewDetail, self).get_context_data(**kwargs)
+        review = ReviewNetwork.objects.order_by('date')
+        context['review'] = review
+        return context
 
 
 def register(request):

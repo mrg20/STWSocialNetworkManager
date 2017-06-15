@@ -45,6 +45,18 @@ class Incidence(models.Model):
         return str(self.user) + " : " + str(self.network)
 
 
+class ReviewNetwork(models.Model):
+    user = models.ForeignKey(User)
+    network = models.ForeignKey(Network)
+    title = models.CharField(max_length=40)
+    explanation = models.TextField(max_length=300)
+    rating = models.TextField(max_length=200)
+    date = models.DateField(default=now)
+
+    def __unicode__(self):
+        return self.user.username + "  " + self.network.name
+
+
 #Only used when the connections with the APIs are done
 class UserNetworkInfo(models.Model):
     user = models.ForeignKey(User)
@@ -54,14 +66,3 @@ class UserNetworkInfo(models.Model):
 
     def __unicode__(self):
         return self.user.username + "   " + self.network.name
-
-
-#Reviews on how the page works with the network
-class ReviewNetwork(models.Model):
-    user = models.ForeignKey(User)
-    network = models.ForeignKey(Network)
-    title = models.CharField(max_length=40)
-    explanation = models.TextField(max_length=300)
-
-    def __unicode__(self):
-        return self.user.username + "  " + self.network.name
