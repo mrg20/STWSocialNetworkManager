@@ -96,8 +96,8 @@ class ReviewDetail(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReviewDetail, self).get_context_data(**kwargs)
-        review = ReviewNetwork.objects.order_by('date')
-        context['review'] = review
+        reviews = ReviewNetwork.objects.order_by('date')
+        context['reviews'] = reviews
         return context
 
 
