@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework.response import Response
 
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
-from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
+from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm, ReviewForm
 from SocialNetworkManagerApp.serializers import NetworkSerializer, ComplementSerializer, BoxSerializer
 from models import Box, Incidence, Network, Complement, ReviewNetwork
 
@@ -99,6 +99,17 @@ class ReviewDetail(ListView):
         reviews = ReviewNetwork.objects.order_by('date')
         context['reviews'] = reviews
         return context
+
+
+class ReviewCreate(CreateView):
+    model = ReviewNetwork
+    template_name = 'review-create.html'
+    form_class = ReviewForm
+    success_url = "/review/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ReviewCreate, self).form_valid(form)
 
 
 def register(request):

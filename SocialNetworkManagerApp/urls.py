@@ -32,8 +32,12 @@ urlpatterns = [
         name='incidence'),
 
     url(r'^review/$',
-        login_required(ReviewDetail.as_view()),
-        name='reviews')
+        ReviewDetail.as_view(),
+        name='reviews'),
+
+    url(r'^new_review/$',
+        login_required(ReviewCreate.as_view()),
+        name='review-create')
 
 ]
 

@@ -5,15 +5,19 @@
 {% endblock %}
 
 {% block content %}
+    <a value="Create Review" href="{% url 'boxes:review-create' %}">
+        Create review
+    </a>
     <tr>
     {% for review in reviews %}
+        <hr>
         <td>
-        <p>{{ review.user }}</p>
-        <p>{{ review.network }}</p>
-        <p>{{ review.title }}</p>
-        <p>{{ review.explanation }}</p>
-        <p>{{ review.rating }}</p>
-        <p>{{ review.date }}</p>
+        <p>User: {{ review.user }}</p>
+        <p>Network: {{ review.network }}</p>
+        <p>Title: {{ review.title }}</p>
+        <p>Opinion: {{ review.explanation }}</p>
+        <p>How good the product is: {{ review.who_to_recommend }}</p>
+        <p>Date of opinion: {{ review.date }}</p>
         </td>
     {% endfor %}
     </tr>

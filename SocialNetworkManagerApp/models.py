@@ -50,7 +50,7 @@ class ReviewNetwork(models.Model):
     network = models.ForeignKey(Network)
     title = models.CharField(max_length=40)
     explanation = models.TextField(max_length=300)
-    rating = models.TextField(max_length=200)
+    who_to_recommend = models.TextField(max_length=200)
     date = models.DateField(default=now)
 
     def __unicode__(self):
