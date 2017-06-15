@@ -9,6 +9,16 @@
     <a value="Create Review" href="{% url 'boxes:review-create' %}">
         Create review
     </a>
+    <h3>Best punctuations</h3>
+    {% for review in best_reviews %}
+        <hr>
+        <p>Network: {{ review.network }} Punctuation: {{ review.rating }}</p>
+    {% endfor %}
+    <h3>Worst punctuations</h3>
+    {% for review in worst_reviews %}
+        <hr>
+        <p>Network: {{ review.network }} Punctuation: {{ review.rating }}</p>
+    {% endfor %}
     {% for review in reviews %}
         <hr>
         <td>

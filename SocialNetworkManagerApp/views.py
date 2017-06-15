@@ -96,9 +96,22 @@ class ReviewDetail(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReviewDetail, self).get_context_data(**kwargs)
+        self.__get_best_worst_reviews(context)
         reviews = ReviewNetwork.objects.order_by('date')
         context['reviews'] = reviews
         return context
+
+    def __get_best_worst_reviews(self, context):
+        networks = Network.objects.all()
+        best_reviews = []
+        worst_reviews = []
+        for network in networks:
+            top_bot_reviews = ReviewNetwork.objects.filter(network=network).order_by('rating')
+            if top_bot_reviews.exists():
+                best_reviews.append(top_bot_reviews.last)
+                worst_reviews.append(top_bot_reviews.first)
+        context['best_reviews'] = best_reviews
+        context['worst_reviews'] = worst_reviews
 
 
 class ReviewCreate(CreateView):
