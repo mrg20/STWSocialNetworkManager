@@ -9,16 +9,23 @@
     <a value="Create Review" href="{% url 'boxes:review-create' %}">
         Create review
     </a>
+
+    <p rel="reviewRating" typeof="Rating">
     <h3>Best punctuations</h3>
     {% for review in best_reviews %}
         <hr>
+        <span property="bestRating">
         <p>Network: {{ review.network }} Punctuation: {{ review.rating }}</p>
+        </span>
     {% endfor %}
     <h3>Worst punctuations</h3>
     {% for review in worst_reviews %}
         <hr>
+        <span property="worstRating">
         <p>Network: {{ review.network }} Punctuation: {{ review.rating }}</p>
+        </span>
     {% endfor %}
+
     {% for review in reviews %}
         <hr>
         <td>
@@ -36,11 +43,7 @@
             <p>Title: {{ review.title }}</p>
             <p>Opinion: {{ review.explanation }}</p>
         </span>
-        <p rel="reviewRating" typeof="Rating">
-            <scan property="ratingValue">
-                How good the product is: {{ review.rating }}
-            </scan>
-        </p>
+        <p>How good the product is: {{ review.rating }}</p>
         <p>Date of opinion: {{ review.date }}</p>
         </td>
     {% endfor %}
