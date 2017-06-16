@@ -11,6 +11,5 @@ div.Generic{
 }
 
 div.Bottom{
-    position: fixed;
     bottom: 0;
 }
