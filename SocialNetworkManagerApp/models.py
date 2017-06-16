@@ -40,8 +40,22 @@ class Incidence(models.Model):
     date = models.DateField(default=now)
     country = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=30, default="")
+
     def __unicode__(self):
         return str(self.user) + " : " + str(self.network)
+
+
+class ReviewNetwork(models.Model):
+    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    user = models.ForeignKey(User)
+    network = models.ForeignKey(Network)
+    title = models.CharField(max_length=40)
+    explanation = models.TextField(max_length=300)
+    rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=RATING_CHOICES)
+    date = models.DateField(default=now)
+
+    def __unicode__(self):
+        return self.user.username + "  " + self.network.name
 
 
 #Only used when the connections with the APIs are done

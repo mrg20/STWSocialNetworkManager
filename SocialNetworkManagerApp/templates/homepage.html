@@ -10,7 +10,11 @@ Homepage
 
 
 {% block content %}
-{{ sections_iterator.new_box }}
+<table>
+    <tr>
+    <td>
+    {{ sections_iterator.new_box }}
+
 <table>
     {% for section in "x"|rjust:"8" %}
         {% if sections_iterator.pair %}
@@ -22,14 +26,22 @@ Homepage
                         <p>{{ sections_iterator.get_box_num }}</p>
                         <form action = "/" method="post">{% csrf_token %}
                             <p>{{ user_box.box_iterator.box_num }}</p>
-                            <p>{{ box.network }} {{ box.complement }}</p>
+                            <span itemscope itemtype="http://schema.org/Organization">
+                            <link itemprop="url" href="/">
+                            <a itemprop="sameAs" href="{{ box.complement.id_network.network_url }}">
+                                    Network: {{ box.complement.id_network.name }}
+                            </a>
+                            </span>
+                            <p>
+                                Complement: {{ box.complement.type }}
+                            </p>
                             <p>
                                 <a value="View Box" href="{% url 'boxes:box_detail' box.box_num %}">
                                     View Box
                                 </a>
                             </p>
                         </form>
-                        </td>
+                    </td>
                 {{ sections_iterator.not_new_box }}
                 {% endif %}
             {% endfor %}
@@ -51,8 +63,19 @@ Homepage
         {% if sections_iterator.pair %}
             </tr>
         {% endif %}
-
-
     {% endfor %}
 </table>
+<td>
+    <p>
+        <span vocab="http://schema.org" typeof="Person">
+        <span property="name">
+            User: {{ user_box.pop.user }}
+        </span>
+        </span>
+    </p>
+</td>
+</tr>
+
+</table>
+
 {% endblock %}

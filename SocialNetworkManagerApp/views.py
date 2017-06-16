@@ -6,15 +6,13 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic.base import View
-from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.response import Response
 
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
-from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm
+from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm, ReviewForm
 from SocialNetworkManagerApp.serializers import NetworkSerializer, ComplementSerializer, BoxSerializer
-from models import Box, Incidence, Network, Complement
+from models import Box, Incidence, Network, Complement, ReviewNetwork
 
 
 class ShowAllBox(ListView):
@@ -87,6 +85,42 @@ class IncidenceCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(IncidenceCreate, self).form_valid(form)
+
+
+class ReviewDetail(ListView):
+    template_name = 'review.html'
+    model = ReviewNetwork
+    success_url="/"
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewDetail, self).get_context_data(**kwargs)
+        self.__get_best_worst_reviews(context)
+        reviews = ReviewNetwork.objects.order_by('date')
+        context['reviews'] = reviews
+        return context
+
+    def __get_best_worst_reviews(self, context):
+        networks = Network.objects.all()
+        best_reviews = []
+        worst_reviews = []
+        for network in networks:
+            top_bot_reviews = ReviewNetwork.objects.filter(network=network).order_by('rating')
+            if top_bot_reviews.exists():
+                best_reviews.append(top_bot_reviews.last)
+                worst_reviews.append(top_bot_reviews.first)
+        context['best_reviews'] = best_reviews
+        context['worst_reviews'] = worst_reviews
+
+
+class ReviewCreate(CreateView):
+    model = ReviewNetwork
+    template_name = 'review-create.html'
+    form_class = ReviewForm
+    success_url = "/review/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ReviewCreate, self).form_valid(form)
 
 
 def register(request):

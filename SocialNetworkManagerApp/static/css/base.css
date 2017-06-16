@@ -9,3 +9,7 @@ div.Right{
 div.Generic{
     clear:both;
 }
+
+div.Bottom{
+    bottom: 0;
+}
