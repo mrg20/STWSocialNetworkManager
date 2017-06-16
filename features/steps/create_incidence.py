@@ -6,7 +6,7 @@ use_step_matcher("re")
 @step("I click to create incidence")
 def step_impl(context):
     context.browser.visit(context.get_url('boxes:homepage'))
-    context.browser.find_by_value('incidence').first.click()
+    context.browser.find_by_value('incidence').click()
 
 
 @step("I fill all the camps")

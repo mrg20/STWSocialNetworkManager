@@ -6,7 +6,7 @@ use_step_matcher("re")
 @step("I click to create button")
 def step_impl(context):
     context.browser.visit(context.get_url('boxes:homepage'))
-    context.browser.find_by_value('New box').first.click()
+    context.browser.find_by_value('New box').click()
 
 
 @step("I complete the form")
