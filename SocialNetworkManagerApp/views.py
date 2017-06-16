@@ -6,10 +6,8 @@ from django.template.context_processors import csrf
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic.base import View
-from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.response import Response
 
 from SocialNetworkManagerApp.controller.TableSizeController import TableSizeController
 from SocialNetworkManagerApp.forms import BoxForm, IncidenceForm, ReviewForm
